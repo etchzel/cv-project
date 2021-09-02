@@ -2,19 +2,19 @@ import React from 'react';
 import AddField from '../AddField';
 
 const dataFormat = {
-  skill: '',
+  language: '',
   level: ''
 };
 
-const Skills = (props) => {
+const Languages = (props) => {
   const { info, update } = props;
-  
-  const generateSkillList = () => {
+
+  const generateLanguageList = () => {
     return info.map((data, idx) => {
       return (
-        <li key={`skill-${idx}`}>
+        <li key={`language-${idx}`}>
           <div className="listContent">
-            <h4>{data.skill}</h4>
+            <h4>{data.language}</h4>
             <p className="desc">{data.level}</p>
           </div>
         </li>
@@ -23,17 +23,17 @@ const Skills = (props) => {
   };
 
   return (
-    <section className="skill">
-      <h3>Competences</h3>
+    <section className="languages">
+      <h3>Languages</h3>
       <ul>
-        {generateSkillList()}
+        {generateLanguageList()}
       </ul>
       <AddField
-        identifier={`skillInfo`}
+        identifier={`langInfo`}
         format={dataFormat} 
         update={update}/>
     </section>
   );
 };
 
-export default Skills;
+export default Languages;

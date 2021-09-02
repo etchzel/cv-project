@@ -1,57 +1,57 @@
 import React from 'react';
+import EditableField from '../EditableField';
 
-const Personal = () => {
+const iconClassName = {
+  address: 'fas fa-home',
+  phone: 'fas fa-phone-alt',
+  mobile: 'fas fa-mobile-alt',
+  mail: 'fas fa-at',
+  linkedIn: 'fab fa-linkedin-in',
+  twitter: 'fab fa-twitter',
+  discord: 'fab fa-discord'
+}
+
+const ContactList = (props) => {
+  const { data, sectionName } = props;
+
+  const generateContactList = () => {
+    return data.map((item, idx) => {
+      return (
+        <div key={`personal-${idx}`} className="info">
+          <i className={`${iconClassName[item.type]}`}></i>
+          <EditableField
+            tag="p"
+            initialData={item.value}
+          />
+        </div>
+      );
+    });
+  };
+
   return (
     <section>
-      <h4>Personal</h4>
-      <div className="info">
-        <i className="fas fa-home"></i>
-        Jl. Komp TCI B6
-      </div>
-      <div className="info">
-        <i className="fas fa-phone-alt"></i>
-        +62225409247
-      </div>
-      <div className="info">
-        <i className="fas fa-mobile-alt"></i>
-        +6282126697966
-      </div>
-      <div className="info">
-        <i className="fas fa-at"></i>
-        +6282126697966
-      </div>
+      <h4>{sectionName}</h4>
+      {generateContactList()}
     </section>
   );
 };
 
-const SocMed = () => {
-  return (
-    <section>
-      <h4>Social Media</h4>
-      <div className="info">
-        <i className="fab fa-linkedin-in"></i>
-        me.poggers
-      </div>
-      <div className="info">
-        <i className="fab fa-twitter"></i>
-        @azurzel
-      </div>
-      <div className="info">
-        <i className="fab fa-discord"></i>
-        azurzel#0001
-      </div>
-    </section>
-  );
-};
+const Contact = (props) => {
+  const { info } = props;
 
-const Contact = () => {
   return (
     <section className="contact">
       <h3>
         Contact
       </h3>
-      <Personal/>
-      <SocMed/>
+      <ContactList
+        data={info.personal}
+        sectionName="Personal"
+      />
+      <ContactList
+        data={info.socMed}
+        sectionName="Social Media"
+      />
     </section>
   );
 };

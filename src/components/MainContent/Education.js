@@ -1,30 +1,43 @@
 import React from 'react';
+import AddField from '../AddField';
 
-const Education = () => {
+const dataFormat = {
+  institution: '',
+  degree: '',
+  field: '',
+  start: '',
+  end: ''
+};
+
+const Education = (props) => {
+  const { info, update } = props;
+
+  const generateEducationList = () => {
+    return info.map((data, idx) => {
+      return (
+        <li key={`exp-${idx}`}>
+          <div className="edu-item">
+            <h4>{`${data.start} - ${data.end}`}</h4>
+            <div className="school">
+              <h4>{data.institution}</h4>
+              <p>{data.degree}</p>
+              <p>{data.field}</p>
+            </div>
+          </div>
+        </li>
+      )
+    });
+  };
+
   return (
     <section className="education-history">
       <h2>Education</h2>
       <ul>
-        <li>
-          <div className="edu-item">
-            <h4>2010-2014</h4>
-            <div className="school">
-              <h4>Istanbul Technical University</h4>
-              <p>Bachelor of Science (BSc)</p>
-              <p>Physics Engineering</p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="edu-item">
-            <h4>2007-2010</h4>
-            <div className="school">
-              <h4>SMAN 17 Bandung</h4>
-              <p>High School Graduate</p>
-              <p>Natural Science</p>
-            </div>
-          </div>
-        </li>
+        {generateEducationList()}
+        <AddField
+          identifier={`eduInfo`}
+          format={dataFormat} 
+          update={update}/>
       </ul>
     </section>
   );

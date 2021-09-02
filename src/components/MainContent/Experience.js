@@ -1,31 +1,44 @@
 import React from 'react';
+import AddField from '../AddField';
 
-const Experience = () => {
+const dataFormat = {
+  position: '',
+  companyName: '',
+  jobDesc: '',
+  start: '',
+  end: ''
+};
+
+const Experience = (props) => {
+  const { info, update } = props;
+
+  const generateExperienceList = () => {
+    return info.map((data, idx) => {
+      return (
+        <li key={`exp-${idx}`}>
+          <div className="work-item">
+            <h4>{`${data.start} - ${data.end}`}</h4>
+            <div className="job">
+              <h4>{data.companyName}</h4>
+              <p>{data.position}</p>
+              <p>{data.jobDesc}</p>
+            </div>
+          </div>
+        </li>
+      )
+    });
+  };
+
   return (
     <section className="work-history">
       <h2>Experience</h2>
       <ul>
-        <li>
-          <div className="work-item">
-            <h4>2014-Present</h4>
-            <div className="job">
-              <h4>TELUS International</h4>
-              <p>Website Annotator, Remote</p>
-              <p>Label data given by a website</p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="work-item">
-            <h4>2014-Present</h4>
-            <div className="job">
-              <h4>TELUS International</h4>
-              <p>Website Annotator, Remote</p>
-              <p>Label data given by a website</p>
-            </div>
-          </div>
-        </li>
+        {generateExperienceList()}
       </ul>
+      <AddField
+        identifier={`expInfo`}
+        format={dataFormat} 
+        update={update}/>
     </section>
   );
 };
