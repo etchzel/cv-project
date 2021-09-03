@@ -1,13 +1,6 @@
 import React from 'react';
 import AddField from '../AddField';
-
-const dataFormat = {
-  position: '',
-  companyName: '',
-  jobDesc: '',
-  start: '',
-  end: ''
-};
+import { expDataFormat } from '../Utils/dataFormat';
 
 const Experience = (props) => {
   const { info, update } = props;
@@ -37,8 +30,8 @@ const Experience = (props) => {
       </ul>
       <AddField
         identifier={`expInfo`}
-        format={dataFormat} 
-        update={update}/>
+        format={expDataFormat} 
+        onAdd={update}/>
     </section>
   );
 };

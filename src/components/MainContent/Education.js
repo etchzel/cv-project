@@ -1,13 +1,6 @@
 import React from 'react';
 import AddField from '../AddField';
-
-const dataFormat = {
-  institution: '',
-  degree: '',
-  field: '',
-  start: '',
-  end: ''
-};
+import { eduDataFormat } from '../Utils/dataFormat';
 
 const Education = (props) => {
   const { info, update } = props;
@@ -36,8 +29,8 @@ const Education = (props) => {
         {generateEducationList()}
         <AddField
           identifier={`eduInfo`}
-          format={dataFormat} 
-          update={update}/>
+          format={eduDataFormat} 
+          onAdd={update}/>
       </ul>
     </section>
   );

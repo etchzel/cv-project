@@ -1,5 +1,5 @@
 import React from 'react';
-import EditableField from '../EditableField';
+import EditField from '../EditField';
 
 const iconClassName = {
   address: 'fas fa-home',
@@ -12,16 +12,22 @@ const iconClassName = {
 }
 
 const ContactList = (props) => {
-  const { data, sectionName } = props;
+  const { data, sectionName, update } = props;
+
+  const handleEdit = (editedData) => {
+    update(editedData, "contactInfo", "edit");
+  };
 
   const generateContactList = () => {
     return data.map((item, idx) => {
       return (
-        <div key={`personal-${idx}`} className="info">
+        <div key={`contact-${idx}`} className="info">
           <i className={`${iconClassName[item.type]}`}></i>
-          <EditableField
+          <EditField
             tag="p"
-            initialData={item.value}
+            init={item}
+            dataKey="value"
+            onEdit={handleEdit}
           />
         </div>
       );
@@ -37,7 +43,13 @@ const ContactList = (props) => {
 };
 
 const Contact = (props) => {
-  const { info } = props;
+  const { info, update } = props;
+  const personalContact = info.filter((item) => {
+    return item.category === 'personal';
+  });
+  const socmedContact = info.filter((item) => {
+    return item.category === 'socmed';
+  });
 
   return (
     <section className="contact">
@@ -45,12 +57,14 @@ const Contact = (props) => {
         Contact
       </h3>
       <ContactList
-        data={info.personal}
+        data={personalContact}
         sectionName="Personal"
+        update={update}
       />
       <ContactList
-        data={info.socMed}
+        data={socmedContact}
         sectionName="Social Media"
+        update={update}
       />
     </section>
   );

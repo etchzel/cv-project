@@ -9,15 +9,15 @@ const Sidebar = (props) => {
     contactInfo,
     skillInfo,
     langInfo,
-    update
+    stateUpdate
   } = props;
 
   return (
     <div className="sidebar">
       <img src={pic} alt="placeholderimg" className="profpic"></img>
-      <Skills info={skillInfo} update={update}/>
-      <Languages info={langInfo} update={update}/>
-      <Contact info={contactInfo}/>
+      <Skills info={skillInfo} update={stateUpdate}/>
+      <Languages info={langInfo} update={stateUpdate}/>
+      <Contact info={contactInfo} update={stateUpdate}/>
     </div>
   );
 };

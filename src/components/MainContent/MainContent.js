@@ -8,21 +8,22 @@ const MainContent = (props) => {
     profileInfo,
     expInfo,
     eduInfo,
-    update
+    stateUpdate
   } = props;
 
   return (
     <div className="main-content">
       <Profile
         info={profileInfo}
+        update={stateUpdate}
       />
       <Experience
         info={expInfo}
-        update={update}
+        update={stateUpdate}
       />
       <Education
         info={eduInfo}
-        update={update}
+        update={stateUpdate}
       />
     </div>
   );

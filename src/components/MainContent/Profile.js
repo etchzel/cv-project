@@ -1,26 +1,36 @@
 import React from 'react';
-import EditableField from '../EditableField';
+import EditField from '../EditField';
 
 const Profile = (props) => {
-  const { info } = props;
+  const { info, update } = props;
+
+  const handleEdit = (editedData) => {
+    update(editedData, "profileInfo", "edit");
+  };
   
   return (
     <>
       <section className="name">
-        <EditableField
+        <EditField
           tag="h1"
-          initialData={info.fullName}
+          init={info}
+          dataKey={'fullName'}
+          onEdit={handleEdit}
         />
-        <EditableField
+        <EditField
           tag="p"
-          initialData={info.role}
+          init={info}
+          dataKey={'role'}
+          onEdit={handleEdit}
         />
       </section>
       <section className="profile">
         <h2>Profile</h2>
-        <EditableField
+        <EditField
           tag="p"
-          initialData={info.profileDesc}
+          init={info}
+          dataKey={'profileDesc'}
+          onEdit={handleEdit}
           type="textarea"
         />
       </section>

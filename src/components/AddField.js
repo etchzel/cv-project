@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import uniqid from "uniqid";
 
-const AddField = ({ identifier, format, update }) => {
+const AddField = ({ identifier, format, onAdd }) => {
   const dataKeys = Object.keys(format);
-  const [state, setState] = useState(format);
+  const [state, setState] = useState({
+    ...format,
+    id: uniqid()
+  });
   const [isAdding, setIsAdding] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
-    update(state, identifier, 'add');
-    setState({ ...state, [dataKeys[0]]: '', [dataKeys[1]]: ''});
+    onAdd(state, identifier, 'add');
+    setState({ ...state, ...format, id: uniqid() });
     setIsAdding(false);
   };
 
@@ -23,7 +26,7 @@ const AddField = ({ identifier, format, update }) => {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    setState({ ...state, [dataKeys[0]]: '', [dataKeys[1]]: ''});
+    setState({ ...format, id: state.id });
     setIsAdding(false);
   };
 
@@ -34,16 +37,16 @@ const AddField = ({ identifier, format, update }) => {
   let input = (
     <form onSubmit={handleSubmit}>
       <input 
-        name={dataKeys[0]} 
+        name={dataKeys[1]} 
         type="text" 
-        placeholder={dataKeys[0]}
+        placeholder={dataKeys[1]}
         autoFocus={true}
         onChange={handleChange}
       />
       <input 
-        name={dataKeys[1]} 
+        name={dataKeys[2]} 
         type="text" 
-        placeholder={dataKeys[1]}
+        placeholder={dataKeys[2]}
         onChange={handleChange}
       />
       <button type="button" onClick={handleCancel}>Cancel</button>
@@ -55,16 +58,10 @@ const AddField = ({ identifier, format, update }) => {
     input = (
       <form onSubmit={handleSubmit}>
         <input 
-          name={dataKeys[0]} 
-          type="text" 
-          placeholder={dataKeys[0]} 
-          autoFocus={true}
-          onChange={handleChange}
-        />
-        <input 
           name={dataKeys[1]} 
           type="text" 
-          placeholder={dataKeys[1]}
+          placeholder={dataKeys[1]} 
+          autoFocus={true}
           onChange={handleChange}
         />
         <input 
@@ -79,10 +76,16 @@ const AddField = ({ identifier, format, update }) => {
           placeholder={dataKeys[3]}
           onChange={handleChange}
         />
-        <input
-          name={dataKeys[4]}
-          type="text"
+        <input 
+          name={dataKeys[4]} 
+          type="text" 
           placeholder={dataKeys[4]}
+          onChange={handleChange}
+        />
+        <input
+          name={dataKeys[5]}
+          type="text"
+          placeholder={dataKeys[5]}
           onChange={handleChange}
         />
         <button type="button" onClick={handleCancel}>Cancel</button>
